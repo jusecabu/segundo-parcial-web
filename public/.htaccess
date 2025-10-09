@@ -1,0 +1,6 @@
+RewriteEngine On
+RewriteBase /segundo-parcial-jscb-dscv/public/
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+RewriteRule ^ index.php [L]
