@@ -1,14 +1,20 @@
 <?php
 
-spl_autoload_register(function ($class) {
-    $baseDir = __DIR__ . '/../';
-    $file = $baseDir . str_replace("\\", "/", $class) . ".php";
+date_default_timezone_set('America/Bogota');
 
-    if (file_exists($file)) {
-        require $file;
-    }
-});
+require __DIR__ . '/../vendor/autoload.php';
 
-use Core\App;
+use Core\Routing\Router;
+use Core\Http\Request;
+use Core\Http\Response;
+use Core\Application\App;
 
-App::run();
+$router = new Router();
+
+require_once __DIR__ . '/../app/routes.php';
+
+$response = new Response();
+$request = new Request();
+$app = new App($router, $request, $response);
+
+$app->run();
