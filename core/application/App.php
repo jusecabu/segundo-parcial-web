@@ -8,20 +8,17 @@ use Core\Http\Response;
 
 class App
 {
-    public function __construct(
-        protected Router $router,
-        protected Request $request,
-        protected Response $response
-    ) {}
 
-    public function run(): void
+    public static function run(): void
     {
-        $result = $this->router->resolve($this->request, $this->response);
+        $request = new Request();
+        $response = new Response();
+        $result = Router::resolve($request, $response);
 
         if ($result instanceof Response) {
             $result->send();
         } elseif (is_string($result)) {
-            $this->response->html($result)->send();
+            $response->html($result)->send();
         }
     }
 }
