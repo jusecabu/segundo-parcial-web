@@ -10,67 +10,67 @@ class HomeModel
     public function getSiteInfo(): array
     {
         return [
-            'title' => 'Bienvenido a Mi Aplicación',
+            'title' => 'Segundo Parcial - Programación WEB',
             'subtitle' => 'Framework PHP Moderno',
             'description' => 'Una aplicación web construida con arquitectura MVC limpia y moderna.',
             'version' => '1.0.0'
         ];
     }
 
-    /**
-     * Obtiene estadísticas del home
-     */
-    public function getStatistics(): array
+    public function getInitialData(): array
     {
         return [
-            [
-                'label' => 'Usuarios Activos',
-                'value' => '1,234',
-                'icon' => '👥'
+            'inventory' => [
+                'R' => 81,
+                'Q' => 106,
+                'initialInventory' => 570,
+                'prestigeLossCostPerUndeliveredUnit' => 400,
+                'orderPlacementCost' => 7_000,
+                'unitStorageCostPerDay' => 125,
             ],
-            [
-                'label' => 'Proyectos Completados',
-                'value' => '56',
-                'icon' => '✅'
+            'dailyCustomerUnitsPurchased' => [
+                25 => [
+                    'probability' => 10,
+                    'range' => [0.0, 0.1],
+                ],
+                26 => [
+                    'probability' => 20,
+                    'range' => [0.1, 0.3],
+                ],
+                27 => [
+                    'probability' => 30,
+                    'range' => [0.3, 0.6],
+                ],
+                28 => [
+                    'probability' => 25,
+                    'range' => [0.6, 0.85],
+                ],
+                29 => [
+                    'probability' => 15,
+                    'range' => [0.85, 1],
+                ],
             ],
-            [
-                'label' => 'Horas de Desarrollo',
-                'value' => '2,890',
-                'icon' => '⏱️'
-            ],
-            [
-                'label' => 'Clientes Satisfechos',
-                'value' => '98%',
-                'icon' => '⭐'
-            ]
-        ];
-    }
-
-    /**
-     * Obtiene características destacadas
-     */
-    public function getFeatures(): array
-    {
-        return [
-            [
-                'title' => 'Arquitectura MVC',
-                'description' => 'Separación clara de responsabilidades con Controllers, Models, Services y Views.',
-                'icon' => '🏗️'
-            ],
-            [
-                'title' => 'Sistema de Routing',
-                'description' => 'Router flexible con soporte para parámetros dinámicos y middlewares.',
-                'icon' => '🛣️'
-            ],
-            [
-                'title' => 'HTTP Moderno',
-                'description' => 'Manejo robusto de Request y Response con soporte para JSON.',
-                'icon' => '🌐'
-            ],
-            [
-                'title' => 'Vistas con Layouts',
-                'description' => 'Sistema de templates con layouts reutilizables y metadata.',
-                'icon' => '🎨'
+            'supplierLeadTime' => [
+                3 => [
+                    'probability' => 20,
+                    'range' => [0.0, 0.2],
+                ],
+                4 => [
+                    'probability' => 30,
+                    'range' => [0.2, 0.5],
+                ],
+                5 => [
+                    'probability' => 35,
+                    'range' => [0.5, 0.85],
+                ],
+                6 => [
+                    'probability' => 10,
+                    'range' => [0.85, 0.95],
+                ],
+                7 => [
+                    'probability' => 5,
+                    'range' => [0.95, 1],
+                ],
             ]
         ];
     }
