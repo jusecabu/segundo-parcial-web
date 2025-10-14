@@ -71,6 +71,18 @@ class HomeModel
                     'probability' => 5,
                     'range' => [0.95, 1],
                 ],
+            ],
+            'linearCongruentialGenerator1' => [
+                'A' => 2678917,
+                'X0' => 4579991,
+                'B' => 1317513,
+                'N' => 9824217,
+            ],
+            'linearCongruentialGenerator2' => [
+                'A' => 7921083,
+                'X0' => 6731297,
+                'B' => 9021531,
+                'N' => 9420811,
             ]
         ];
     }
