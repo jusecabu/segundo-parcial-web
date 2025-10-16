@@ -29,7 +29,8 @@ class Request
     {
         $scriptName = $_SERVER['SCRIPT_NAME']; // Ej: /mi-trabajo/index.php
         $scriptDir = str_replace('\\', '/', dirname($scriptName)); // Ej: /mi-trabajo
-
+        // remove also the public at the end
+        $scriptDir = preg_replace('#/public$#', '', $scriptDir);
         // Si está en la raíz, retorna cadena vacía
         if ($scriptDir === '/' || $scriptDir === '.') {
             return '';
