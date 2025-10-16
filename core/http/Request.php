@@ -6,6 +6,7 @@ class Request
 {
     protected string $method;
     protected string $uri;
+    protected string $basePath;
     protected array $query;
     protected array $body;
     protected array $headers;
@@ -16,11 +17,25 @@ class Request
     {
         $this->method = $_SERVER['REQUEST_METHOD'];
         $this->uri = strtok($_SERVER['REQUEST_URI'], '?');
+        $this->basePath = $this->detectBasePath();
         $this->query = $_GET;
         $this->body = $_POST;
         $this->headers = getallheaders();
         $this->files = $_FILES;
         $this->cookies = $_COOKIE;
+    }
+
+    protected function detectBasePath(): string
+    {
+        $scriptName = $_SERVER['SCRIPT_NAME']; // Ej: /mi-trabajo/index.php
+        $scriptDir = str_replace('\\', '/', dirname($scriptName)); // Ej: /mi-trabajo
+
+        // Si está en la raíz, retorna cadena vacía
+        if ($scriptDir === '/' || $scriptDir === '.') {
+            return '';
+        }
+
+        return $scriptDir;
     }
 
     public function getMethod(): string
@@ -33,9 +48,24 @@ class Request
         return $this->uri;
     }
 
+    public function getBasePath(): string
+    {
+        return $this->basePath;
+    }
+
     public function getPath(): string
     {
-        return parse_url($this->uri, PHP_URL_PATH);
+        $path = parse_url($this->uri, PHP_URL_PATH);
+
+        // Remover el base path si existe
+        if ($this->basePath !== '' && str_starts_with($path, $this->basePath)) {
+            $path = substr($path, strlen($this->basePath));
+        }
+
+        // Normalizar: remover trailing slash excepto para la raíz
+        $path = '/' . trim($path, '/');
+
+        return $path;
     }
 
     public function getQuery(?string $key = null, mixed $default = null): mixed
